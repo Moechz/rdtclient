@@ -1,0 +1,95 @@
+{
+  "app_id": "rdtclientdocker",
+  "title": "rdt-client",
+  "image": "rogerfar/rdtclient:2.0.136",
+  "repo_name": "rdtclient",
+  "mode": "wrapper",
+  "container_port": 6500,
+  "category": [
+    "Audio_Video_Entertainment"
+  ],
+  "volumes": [
+    {
+      "host": "/Volume1/DockerAppData/rdtclientdocker/data",
+      "container": "/data"
+    }
+  ],
+  "env": {
+    "TZ": "Asia/Shanghai"
+  },
+  "auth": "linuxserver.io",
+  "upstream_url": "https://github.com/rogerfar/rdt-client",
+  "upstream_license": "MIT",
+  "descript": "Real-Debrid Client Proxy. Packaged for TerraMaster TOS 7: the official Docker Hub image runs as a container on your NAS, keeps its data in the application data folder (so it survives restarts and updates), and is opened from its desktop icon.",
+  "release_note": "1. First release.",
+  "important": "First run: open the web UI and complete the initial setup. Data lives in /Volume1/DockerAppData/rdtclientdocker/ and survives restarts and updates. The container runs as uid 1000, so mounted folders must be readable by that user. Needs DockerEngine; configure a registry mirror if Docker Hub is unreachable. Back up the application data folder before uninstalling with data removal. Plain HTTP on the LAN.",
+  "probe": {
+    "user_in_image": "(root)",
+    "entrypoint": [
+      "/init"
+    ],
+    "cmd": null,
+    "exposed_ports": [
+      6500
+    ],
+    "declared_volumes": [],
+    "image_healthcheck": [
+      "CMD-SHELL",
+      "curl --fail http://localhost:6500 || exit"
+    ],
+    "digest": "rogerfar/rdtclient@sha256:a05f0427946a4c3c64dc9d556c017f9a181acec320ecf218b6334a1066c11d1f",
+    "architecture": "x86_64",
+    "platforms": [],
+    "http_client_in_image": "curl",
+    "trial_run": {
+      "ok": true,
+      "http_code": "",
+      "state": "running",
+      "paths": [],
+      "host_port": 18000,
+      "log_tail": "': Operation not permitted\nchown: changing ownership of '/app/zh-Hans/Microsoft.VisualStudio.TraceDataCollector.resources.dll': Operation not permitted\nchown: changing ownership of '/app/zh-Hans': Operation not permitted\nchown: changing ownership of '/app/zh-Hant/Microsoft.CodeCoverage.Core.resources.dll': Operation not permitted\nchown: changing ownership of '/app/zh-Hant/Microsoft.TestPlatform.CommunicationUtilities.resources.dll': Operation not permitted\nchown: changing ownership of '/app/zh-Hant/Microsoft.TestPlatform.CoreUtilities.resources.dll': Operation not permitted\nchown: changing ownership of '/app/zh-Hant/Microsoft.TestPlatform.CrossPlatEngine.resources.dll': Operation not permitted\nchown: changing ownership of '/app/zh-Hant/Microsoft.VisualStudio.TestPlatform.Common.resources.dll': Operation not permitted\nchown: changing ownership of '/app/zh-Hant/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll': Operation not permitted\nchown: changing ownership of '/app/zh-Hant/Microsoft.VisualStudio.TraceDataCollector.resources.dll': Operation not permitted\nchown: changing ownership of '/app/zh-Hant': Operation not permitted\nchown: changing ownership of '/app': Operation not permitted\nchown: changing ownership of '/data/db': Operation not permitted\nchown: changing ownership of '/data/downloads': Operation not permitted\nchown: changing ownership of '/data': Operation not permitted\ns6-applyuidgid: fatal: unable to set supplementary group list: Operation not permitted",
+      "files_in_mounts": ""
+    },
+    "docker_hub": {},
+    "github": {
+      "owner": "rogerfar",
+      "repo": "rdt-client",
+      "description": "Real-Debrid Client Proxy",
+      "license": "MIT",
+      "homepage": ""
+    }
+  },
+  "healthcheck": [
+    "CMD-SHELL",
+    "curl -fsS http://127.0.0.1:6500/ >/dev/null || exit 1"
+  ],
+  "platform": "x86_64",
+  "user": "1000:1000",
+  "publisher": "Moechz",
+  "compose_project": "rdtclientdocker",
+  "github_repo": "rdtclient",
+  "upstream_version": "2.0.136",
+  "release_tag_prefix": "v",
+  "version": "2.0.136-1",
+  "help": "https://github.com/Moechz/rdtclient/issues",
+  "official": "https://github.com/rogerfar/rdt-client",
+  "license": "MIT",
+  "docker_socket": false,
+  "group_add": [],
+  "platforms": [
+    "x86_64",
+    "aarch64"
+  ],
+  "translations": {
+    "zh-cn": {
+      "descript": "Real-Debrid 种子/磁力下载客户端。",
+      "important": "首次使用请打开网页完成初始化。数据保存在 DockerAppData/rdtclientdocker，重启和升级不会丢失。容器以 uid 1000 运行，挂载目录需对该用户可读。需要 DockerEngine；Docker Hub 不可达时先配置镜像加速。卸载并删除数据前请备份。局域网内为 HTTP。"
+    },
+    "zh-hk": {
+      "descript": "Real-Debrid 种子/磁力下载客户端。",
+      "important": "首次使用請開啟網頁完成初始化。資料保存在 DockerAppData/rdtclientdocker，重新啟動和升級不會遺失。容器以 uid 1000 運行，掛載目錄需對該使用者可讀。需要 DockerEngine；Docker Hub 不可達時先設定鏡像加速。解除安裝並刪除資料前請備份。區域網路內為 HTTP。"
+    }
+  },
+  "host_port": 8076,
+  "entrypoint_file": "specs/rdtclient-entrypoint.sh"
+}
