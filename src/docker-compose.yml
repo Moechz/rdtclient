@@ -1,7 +1,7 @@
 # ===========================================================================
 # rdt-client for TerraMaster TOS 7 (Docker application)
 # ===========================================================================
-# Upstream image : rogerfar/rdtclient:2.0.136 (Docker Hub, used unmodified)
+# Upstream image : rogerfar/rdtclient:2.0.143 (Docker Hub, used unmodified)
 #                  -> https://github.com/rogerfar/rdt-client
 #
 # Ports   : host 8076 -> container 6500. The host port is in the
@@ -28,7 +28,7 @@
 
 services:
   rdtclientdocker:
-    image: rogerfar/rdtclient:2.0.136
+    image: rogerfar/rdtclient:2.0.143
     container_name: rdtclientdocker
     restart: unless-stopped
     user: "1000:1000"

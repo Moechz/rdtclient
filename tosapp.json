@@ -1,7 +1,7 @@
 {
   "app_id": "rdtclientdocker",
   "title": "rdt-client",
-  "image": "rogerfar/rdtclient:2.0.136",
+  "image": "rogerfar/rdtclient:2.0.143",
   "repo_name": "rdtclient",
   "mode": "wrapper",
   "container_port": 6500,
@@ -17,48 +17,12 @@
   "env": {
     "TZ": "Asia/Shanghai"
   },
-  "auth": "linuxserver.io",
+  "auth": "rogerfar",
   "upstream_url": "https://github.com/rogerfar/rdt-client",
   "upstream_license": "MIT",
-  "descript": "Real-Debrid Client Proxy. Packaged for TerraMaster TOS 7: the official Docker Hub image runs as a container on your NAS, keeps its data in the application data folder (so it survives restarts and updates), and is opened from its desktop icon.",
-  "release_note": "1. First release.",
-  "important": "First run: open the web UI and complete the initial setup. Data lives in /Volume1/DockerAppData/rdtclientdocker/ and survives restarts and updates. The container runs as uid 1000, so mounted folders must be readable by that user. Needs DockerEngine; configure a registry mirror if Docker Hub is unreachable. Back up the application data folder before uninstalling with data removal. Plain HTTP on the LAN.",
-  "probe": {
-    "user_in_image": "(root)",
-    "entrypoint": [
-      "/init"
-    ],
-    "cmd": null,
-    "exposed_ports": [
-      6500
-    ],
-    "declared_volumes": [],
-    "image_healthcheck": [
-      "CMD-SHELL",
-      "curl --fail http://localhost:6500 || exit"
-    ],
-    "digest": "rogerfar/rdtclient@sha256:a05f0427946a4c3c64dc9d556c017f9a181acec320ecf218b6334a1066c11d1f",
-    "architecture": "x86_64",
-    "platforms": [],
-    "http_client_in_image": "curl",
-    "trial_run": {
-      "ok": true,
-      "http_code": "",
-      "state": "running",
-      "paths": [],
-      "host_port": 18000,
-      "log_tail": "': Operation not permitted\nchown: changing ownership of '/app/zh-Hans/Microsoft.VisualStudio.TraceDataCollector.resources.dll': Operation not permitted\nchown: changing ownership of '/app/zh-Hans': Operation not permitted\nchown: changing ownership of '/app/zh-Hant/Microsoft.CodeCoverage.Core.resources.dll': Operation not permitted\nchown: changing ownership of '/app/zh-Hant/Microsoft.TestPlatform.CommunicationUtilities.resources.dll': Operation not permitted\nchown: changing ownership of '/app/zh-Hant/Microsoft.TestPlatform.CoreUtilities.resources.dll': Operation not permitted\nchown: changing ownership of '/app/zh-Hant/Microsoft.TestPlatform.CrossPlatEngine.resources.dll': Operation not permitted\nchown: changing ownership of '/app/zh-Hant/Microsoft.VisualStudio.TestPlatform.Common.resources.dll': Operation not permitted\nchown: changing ownership of '/app/zh-Hant/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll': Operation not permitted\nchown: changing ownership of '/app/zh-Hant/Microsoft.VisualStudio.TraceDataCollector.resources.dll': Operation not permitted\nchown: changing ownership of '/app/zh-Hant': Operation not permitted\nchown: changing ownership of '/app': Operation not permitted\nchown: changing ownership of '/data/db': Operation not permitted\nchown: changing ownership of '/data/downloads': Operation not permitted\nchown: changing ownership of '/data': Operation not permitted\ns6-applyuidgid: fatal: unable to set supplementary group list: Operation not permitted",
-      "files_in_mounts": ""
-    },
-    "docker_hub": {},
-    "github": {
-      "owner": "rogerfar",
-      "repo": "rdt-client",
-      "description": "Real-Debrid Client Proxy",
-      "license": "MIT",
-      "homepage": ""
-    }
-  },
+  "descript": "rdt-client is a web interface that manages torrent and usenet downloads through a debrid account (Real-Debrid, AllDebrid, Premiumize, TorBox, DebridLink or HIGHWAY): add magnets, torrents or NZB files, let the debrid service fetch them and download the files to this NAS, unpacking archives automatically. It also emulates the qBittorrent API so Sonarr, Radarr or Couchpotato can use it. This package runs the official Docker Hub image as a non-root container with its data in the application data folder.",
+  "release_note": "Review remediation: PRIVACY.md, NOTICE.md and the README privacy / third-party / licence sections added; the help field now opens the privacy policy; the author and both Chinese descriptions were corrected (the image is rogerfar/rdtclient, not LinuxServer.io, and the app is a debrid download manager rather than a BitTorrent client); upstream upgraded to 2.0.143.",
+  "important": "A premium debrid account is required: add your provider and its API token in Settings after the first start. Downloads land in /Volume1/DockerAppData/rdtclientdocker/data/downloads - keep the download path below that folder so the files survive restarts and updates. The container runs as uid 1000. Needs DockerEngine; configure a registry mirror if Docker Hub is unreachable. Back up the data folder before uninstalling with data removal. Plain HTTP on the LAN.",
   "healthcheck": [
     "CMD-SHELL",
     "curl -fsS http://127.0.0.1:6500/ >/dev/null || exit 1"
@@ -68,10 +32,10 @@
   "publisher": "Moechz",
   "compose_project": "rdtclientdocker",
   "github_repo": "rdtclient",
-  "upstream_version": "2.0.136",
+  "upstream_version": "2.0.143",
   "release_tag_prefix": "v",
-  "version": "2.0.136-2",
-  "help": "https://github.com/Moechz/rdtclient/issues",
+  "version": "2.0.143-1",
+  "help": "https://github.com/Moechz/rdtclient/blob/main/PRIVACY.md",
   "official": "https://github.com/rogerfar/rdt-client",
   "license": "MIT",
   "docker_socket": false,
@@ -82,14 +46,14 @@
   ],
   "translations": {
     "zh-cn": {
-      "descript": "Real-Debrid 种子/磁力下载客户端。",
-      "important": "首次使用请打开网页完成初始化。数据保存在 DockerAppData/rdtclientdocker，重启和升级不会丢失。容器以 uid 1000 运行，挂载目录需对该用户可读。需要 DockerEngine；Docker Hub 不可达时先配置镜像加速。卸载并删除数据前请备份。局域网内为 HTTP。"
+      "descript": "rdt-client 是一个通过网盘（Real-Debrid、AllDebrid、Premiumize、TorBox、DebridLink 或 HIGHWAY）托管种子与 usenet 下载的网页工具：添加磁力、种子或 NZB 后由网盘取回文件并下载到本机，自动解压；同时提供 qBittorrent 兼容 API，可接入 Sonarr / Radarr / Couchpotato。本应用直接运行 Docker Hub 官方镜像（非 root），数据保存在应用数据目录。",
+      "important": "需要付费的网盘账号：首次打开后在设置里填入服务商与 API 令牌。下载文件落在 DockerAppData/rdtclientdocker/data/downloads——下载路径请保持在该目录下，否则重启和升级后不保留。容器以 uid 1000 运行。需要 DockerEngine；Docker Hub 不可达时先配置镜像加速。卸载并删除数据前请备份。局域网内为 HTTP。"
     },
     "zh-hk": {
-      "descript": "Real-Debrid 种子/磁力下载客户端。",
-      "important": "首次使用請開啟網頁完成初始化。資料保存在 DockerAppData/rdtclientdocker，重新啟動和升級不會遺失。容器以 uid 1000 運行，掛載目錄需對該使用者可讀。需要 DockerEngine；Docker Hub 不可達時先設定鏡像加速。解除安裝並刪除資料前請備份。區域網路內為 HTTP。"
+      "descript": "rdt-client 是一個透過網盤（Real-Debrid、AllDebrid、Premiumize、TorBox、DebridLink 或 HIGHWAY）託管種子與 usenet 下載的網頁工具：加入磁力、種子或 NZB 後由網盤取回檔案並下載到本機，自動解壓；同時提供 qBittorrent 相容 API，可接入 Sonarr / Radarr / Couchpotato。本應用直接執行 Docker Hub 官方映像（非 root），資料保存在應用資料目錄。",
+      "important": "需要付費的網盤帳號：首次開啟後在設定裡填入服務商與 API 權杖。下載檔案落在 DockerAppData/rdtclientdocker/data/downloads——下載路徑請保持在該目錄下，否則重新啟動和升級後不保留。容器以 uid 1000 運行。需要 DockerEngine；Docker Hub 不可達時先設定鏡像加速。解除安裝並刪除資料前請備份。區域網路內為 HTTP。"
     }
   },
   "host_port": 8076,
-  "entrypoint_file": "specs/rdtclient-entrypoint.sh"
+  "entrypoint_file": "src/entrypoint.sh"
 }

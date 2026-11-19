@@ -3,7 +3,10 @@
 # through its own init. Run the unmodified .NET web app directly as uid 1000.
 set -u
 set -e
-mkdir -p /data
+mkdir -p /data /data/db /data/downloads
+# The image sets HOME=/root; point it at the data volume so nothing tries to
+# write outside the mounted folder when running as an unprivileged user.
+export HOME=/data
 export ASPNETCORE_URLS=http://0.0.0.0:6500
 cd /app
 exec dotnet RdtClient.Web.dll
